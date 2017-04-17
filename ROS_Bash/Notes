@@ -1,0 +1,49 @@
+USAGE NOTES:
+For Linux and Windows:
+Docker should be installed before anything else is completed!
+(At the time of writing this, Docker for Linux works fine. Docker for Windows is still having some trouble running.
+This is probably due to the fact that the ip inside the container is different than that of the host OS.)
+
+The container we will be using needs the drone_challenge image in order to run.
+To get the image, we can either download the Dockerfile and bash files to build
+it ourselves, or we can pull it from the online repo (to be completed still).
+
+For Windows Only:
+Xming (or any Xforwarding client) needs to be installed in order for you to see the GUI produced in a Docker container.
+Download Xming for Windows, and run the installer. You don't really need the ssh client for this, but make sure you
+install XLauncher if you aren't entirely comfortable with the command line (although you should be... you're a CSE major).
+
+
+--------------------------------------------------------------------------------
+Building it:
+Start Docker on your machine.
+Download the dockerfile, catkinsetup.sh, and entrypoint.sh (should be in a zip somewhere)
+Use the Windows Powershell or Linux Terminal to navigate to the directory they are stored in.
+Run the command "docker build -t drone_challenge ."
+(Docker will build the image with "drone_challenge" as the tag, while looking in the current directory for the dockerfile)
+After building, to double check, type "docker images" and make sure drone_challenge (or whatever you called it) is in the list.
+
+--------------------------------------------------------------------------------
+Pulling it:
+To pull the current version of the files, we need to start Docker.
+Once started, we can run "docker run -it --name <container name> mabecr/drone". (Or something like that)
+(Docker will create a container in interactive mode with TTY enable that has the name you provide in place of the brackets)
+It will say the image isn't found locally, and it will download and extract it.
+
+--------------------------------------------------------------------------------
+Using it:
+Once we are in the container, the terminal will switch to "root@[some memory address]". This is how we know we are in the container.
+Before doing anything, we need to run the command "./catkinsetup". This will configure all of the catkin elements we need.
+After the script says it was successful, we should be able to use ROS and bebop_autonomy without doing any extra work.
+
+
+
+Commands: [Things in brackets are optional]
+--------------------------------------------------------------------------------
+Linux:
+docker run -it drone_challenge [--name drone_challenge]
+roslaunch bebop_driver bebop_node.launch
+rosrun web_service_viewer web_service_viewer
+navigate to http://localhost:8080?
+
+Windows
