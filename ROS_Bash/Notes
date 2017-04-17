@@ -44,6 +44,6 @@ Linux:
 docker run -it drone_challenge [--name drone_challenge]
 roslaunch bebop_driver bebop_node.launch
 rosrun web_service_viewer web_service_viewer
-navigate to http://localhost:8080?
+navigate to http://localhost:8080
 
 Windows
